@@ -1,5 +1,5 @@
 dash
-dash-bootstrap-components
-plotly
+dash_bootstrap_components
 pandas
+plotly
 gunicorn
