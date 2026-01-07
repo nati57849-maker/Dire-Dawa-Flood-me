@@ -1,0 +1,10 @@
+numpy
+pandas
+rasterio
+richdem
+matplotlib
+scipy
+streamlit
+schedule
+python-telegram-bot
+requests

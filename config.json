@@ -1,0 +1,16 @@
+{
+  "project_dir": "C:/Users/gfeka/Desktop/phyton",
+  "api_key": "7a7d64ed416b5126dd5f6059a8ef3811",
+  "dem_type": "SRTMGL1",
+  "tile_width": 0.25,
+  "tile_height": 0.25,
+  "merged_dem_file": "dire_dawa_merged_dem.tif",
+  "clipped_dem_file": "dire_dawa_clipped_dem.tif",
+  "polygon_coords": [
+    [41.6, 9.4],
+    [42.1, 9.4],
+    [42.1, 9.8],
+    [41.6, 9.8],
+    [41.6, 9.4]
+  ]
+}

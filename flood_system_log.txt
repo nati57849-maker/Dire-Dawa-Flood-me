@@ -1,0 +1,1 @@
+2025-09-05 09:10:49,781 - ERROR - Weather fetch failed: 401 Client Error: Unauthorized for url: http://api.weatherapi.com/v1/current.json?key=YOUR_WEATHERAPI_KEY&q=9.6008,41.8661
