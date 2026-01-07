@@ -1,14 +1,5 @@
-numpy
-pandas
-rasterio
-richdem
-matplotlib
-scipy
-streamlit
-schedule
-python-telegram-bot
-requests
 dash
 dash-bootstrap-components
 plotly
+pandas
 gunicorn
