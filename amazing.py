@@ -5,8 +5,8 @@ import logging
 import requests
 import pandas as pd
 import numpy as np
-import rasterio
-import richdem as rd
+# import rasterio
+# import richdem as rd
 import datetime as dt
 
 # -------------------------------
@@ -176,3 +176,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\nProcess interrupted by user. Exiting safely...")
         logging.info("Process stopped manually.")
+
