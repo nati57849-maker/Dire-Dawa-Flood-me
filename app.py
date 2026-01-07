@@ -13,7 +13,7 @@ def load_data():
     flood_df = pd.read_csv(flood_log) if os.path.exists(flood_log) else pd.DataFrame()
     river_df = pd.read_csv(river_pred) if os.path.exists(river_pred) else pd.DataFrame()
     
-    if not flood_df.empty:
+    if not flood_df.empty and 'datetime' in flood_df.columns:
         flood_df['datetime'] = pd.to_datetime(flood_df['datetime'], errors='coerce')
     
     return flood_df, river_df
@@ -141,4 +141,6 @@ def update_graphs(selected_metric):
     return flood_gauge, precip_gauge, time_chart, river_chart, map_fig
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 8050))
+    app.run_server(host="0.0.0.0", port=port, debug=False)
