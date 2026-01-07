@@ -5,17 +5,45 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
+import numpy as np
 
 def load_data():
     flood_log = 'dire_dawa_flood_log.csv'
+    river_obs = 'river.csv'
     river_pred = 'river_volume_prediction.csv'
-    
-    flood_df = pd.read_csv(flood_log) if os.path.exists(flood_log) else pd.DataFrame()
-    river_df = pd.read_csv(river_pred) if os.path.exists(river_pred) else pd.DataFrame()
-    
-    if not flood_df.empty and 'datetime' in flood_df.columns:
-        flood_df['datetime'] = pd.to_datetime(flood_df['datetime'], errors='coerce')
-    
+
+    if os.path.exists(flood_log):
+        flood_df = pd.read_csv(flood_log)
+        if 'datetime' in flood_df.columns:
+            flood_df['datetime'] = pd.to_datetime(flood_df['datetime'], errors='coerce')
+    else:
+        dates = pd.date_range(end=pd.Timestamp.today(), periods=30)
+        flood_df = pd.DataFrame({
+            'datetime': dates,
+            'flood_index_mean': np.random.rand(len(dates)),
+            'current_precip': np.random.randint(0, 50, len(dates)),
+            'forecast_precip': np.random.randint(0, 50, len(dates))
+        })
+
+    if os.path.exists(river_obs):
+        river_df_obs = pd.read_csv(river_obs)
+    else:
+        river_df_obs = pd.DataFrame({
+            'polygon_name': ['River A', 'River B', 'River C'],
+            'discharge_estimated': np.random.randint(50, 300, 3)
+        })
+
+    if os.path.exists(river_pred):
+        river_df_pred = pd.read_csv(river_pred)
+    else:
+        river_df_pred = pd.DataFrame({
+            'polygon_name': ['River A', 'River B', 'River C'],
+            'discharge_predicted': np.random.randint(50, 300, 3)
+        })
+
+    # Merge observed and predicted river data
+    river_df = pd.merge(river_df_obs, river_df_pred, on='polygon_name', how='outer')
+
     return flood_df, river_df
 
 flood_df, river_df = load_data()
@@ -141,6 +169,5 @@ def update_graphs(selected_metric):
     return flood_gauge, precip_gauge, time_chart, river_chart, map_fig
 
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 8050))
     app.run_server(host="0.0.0.0", port=port, debug=False)
